@@ -18,7 +18,7 @@ gerenciado depois.
 - **K3s em VM única** — custa apenas uma VM, sobe em menos de 2 minutos.
   Contra: um nó só, e toda a manutenção fica por nossa conta.
 - **Opções descartadas de imediato:** kind e k3d rodam o cluster dentro da
-  máquina local, sem IP público — a aplicação não ficaria acessível para
+  máquina local usando o docker, sem IP público — a aplicação não ficaria acessível para
   clientes externos. Docker Compose seria mais barato, mas não usaria o
   Kubernetes, que é o objetivo do laboratório.
 
@@ -40,9 +40,6 @@ rodariam no MKS, tornando mais fácil a migração no futuro.
   a aplicação cai inteira — ter dois pods protege contra falha da aplicação,
   não contra falha da máquina. Por isso o alvo de 99,5% da tabela de
   requisitos vale para a aplicação, sem contar manutenção planejada.
-- **O cluster está exposto na internet.** O script de provisionamento libera
-  as portas 22, 8000 e 6443 para qualquer origem. Essas portas poderiam ser
-  restritas a um IP único, o que seria o esperado em produção.
 - **A credencial usada no deploy dá acesso total ao cluster.** O pipeline se
   autentica com o kubeconfig do K3s, guardado como secret no GitHub Actions.
   O armazenamento é seguro, mas a credencial em si não tem limite de
